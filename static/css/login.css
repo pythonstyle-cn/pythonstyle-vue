@@ -1,0 +1,110 @@
+body {
+	font-family: "Microsoft YaHei", sans-serif;
+	color: #000000;
+	line-height: 1.72;
+	font-size: 14px;
+	overflow-x: hidden;
+    background-color: #ffffff;
+    margin: 0;
+    padding: 0;
+    background: url("/static/images/login-bg-blur.jpg") top center no-repeat;
+    background-size: 100%;
+}
+html,
+body {
+    height: 100%;
+}
+a {
+    color: #33cabb;
+	-webkit-transition: .3s linear;
+	transition: .3s linear
+}
+.content{
+	display: flex;
+	justify-content: center;
+}
+.content p{
+    position: fixed;
+    bottom: 10px;
+    color: #fff;
+}
+/* 垂直水平居中 */
+.center-vh {
+    display: -webkit-box;
+    display: flex;
+    -webkit-box-pack: center;
+	justify-content: top;
+    -webkit-box-align: center;
+    align-items: center;
+    height: 100%;
+}
+.header{
+    height: 35px;
+    line-height: 35px;
+    font-size: 20px;
+    text-align: center;
+}
+.login{
+    width: 360px;
+    padding: 25px;
+    height: 300px;
+    margin-top: 30%;
+    border: 1px solid #dddddd;
+    border-radius: 8px;
+    background: rgba(255,255,255,.9);
+
+}
+.login .inpt{
+    width: 90%;
+    border-radius: 4px;
+    border:1px solid #dcdfe6;
+    height: 35px;
+    line-height: 35px;
+    padding: 0 15px;
+    margin: 10px 0;
+}
+.login .inpt:focus{
+    border: none;
+    outline:1px solid #33cabb;
+}
+.verycode{
+    margin: 15px 0;
+    height: 40px;
+}
+
+.code{
+    width: 200px;
+    border-radius: 4px;
+    border:1px solid #dcdfe6;
+    height: 35px;
+    line-height: 35px;
+    padding: 0 15px;
+    margin-right: 15px;
+    vertical-align: center;
+}
+.code:focus{
+    border: none;
+    outline:1px solid #33cabb;
+}
+.code_img{
+    vertical-align: middle;
+    height: 33px;
+    cursor: pointer;
+    border: 1px solid #3A7734;
+}
+.submit{
+    width: 100%;
+    height: 35px;
+    line-height: 35px;
+    background: #1890ff;
+    border-color: #1890ff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+    text-align: center;
+}
+.submit:hover{
+    background: rgba(24, 144, 255, 0.5);
+}

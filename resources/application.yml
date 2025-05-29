@@ -1,0 +1,40 @@
+#pythonstyle配置
+pythonstyle:
+  profiles:
+    active: dev
+
+# 开发环境配置
+server:
+  host: 0.0.0.0
+  # 服务器的HTTP端口，默认为5000
+  port: 8081
+  debug: True
+
+
+# 用户配置
+user:
+  password:
+    # 密码最大错误次数
+    maxRetryCount: 8
+    # 密码锁定时间（默认10分钟）
+    lockTime: 10
+
+# token配置
+token:
+    # 令牌自定义标识
+    header: Authorization
+    # 令牌密钥
+    secret: abcdefghijklmnopqrstuvwxyz
+    # 令牌有效期（默认30分钟）
+    expireTime: 30
+
+#是否开启验证码
+captcha:
+  captchaEnabled: True
+  
+log:
+  #是否开启登录日志
+  loginEnabled: True
+  #是否开启操作日志
+  operationEnabled: True
+

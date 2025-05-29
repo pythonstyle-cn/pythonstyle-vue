@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>提示信息</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+<div class="content">
+    <div class="tips center-vh">
+        <div class="header">- 温馨提示 -</div>
+        <p>{{data.content}}<span id="times">3</span> 秒后跳转登录</p>
+    </div>
+</div>
+<script type="text/javascript">
+    var goto = "{{ data.goto | safe}}"
+    var countDown = setInterval(function () {
+        var times = document.getElementById("times");
+        var count = parseInt(times.innerHTML);
+
+        if (count > 0) {
+            times.innerHTML = count - 1;
+        } else {
+            clearInterval(countDown);
+            window.location.href = goto;
+        }
+    }, 1000);
+
+</script>
+</body>
+</html>

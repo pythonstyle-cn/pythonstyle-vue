@@ -1,0 +1,25 @@
+pythonstyle:
+  datasource:
+    mysql:
+        # 主库数据源
+        master:
+          host: '127.0.0.1'
+          port: 3306
+          user: 'root'
+          password: '123456'
+          db: 'db_pythonstyle_vue'
+        # 从库数据源
+        slave:
+          # 从数据源开关
+          host: '127.0.0.1'
+          port: 3306
+          user: 'root'
+          password: ''
+          database: 'db_pythonstyle_vue'
+
+    #配置redis数据库
+    redis:
+      host: 127.0.0.1
+      port: 6379
+      database: 2
+      password: '123456'

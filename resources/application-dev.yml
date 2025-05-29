@@ -1,0 +1,49 @@
+pythonstyle:
+  datasource:
+    mysql:
+        # 主库数据源
+        master:
+          host: '127.0.0.1'
+          port: 3306
+          user: 'root'
+          password: ''
+          db: 'db_pythonstyle'
+        # 从库数据源
+        slave:
+          # 从数据源开关
+          host: '127.0.0.1'
+          port: 3306
+          user: 'root'
+          password: ''
+          database: 'db_pythonstyle'
+
+    sqlite:
+      # 主库数据源
+      master:
+        filename: 'db.sqlite'
+        create_db: True
+        timeout: 5.0
+
+    oracle:
+      # 主库数据源
+      master:
+        user: root
+        password: ''
+        dsn: '127.0.0.1'
+
+    postgres:
+      # 主库数据源
+      # 主库数据源
+      master:
+        host: '127.0.0.1'
+        port: 3306
+        user: 'root'
+        password: ''
+        database: ''
+        
+    #配置redis数据库
+    redis:
+      host: localhost # Redis 服务器地址
+      port: 6379 # Redis 服务器端口号
+      database: 8 # Redis 数据库编号
+      password: '' # Redis 访问密码
