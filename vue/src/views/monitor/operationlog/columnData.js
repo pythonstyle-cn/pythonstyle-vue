@@ -1,0 +1,15 @@
+export const columnData = [
+    {label:'ID', prop:'id', width:'80', align:'center'},
+    {label:'模块标题', prop:'title', width:'80', align:'center'},
+    {label:'业务类型', prop:'business_type', align:'center'},
+    {label:'方法名称', prop:'method', align:'center'},
+    {label:'请求方式', prop:'request_method', align:'center'},
+    {label:'操作类别', prop:'op_type', align:'center'},
+    {label:'操作人员', prop:'op_name', align:'center'},
+    {label:'部门名称', prop:'dept_name', align:'center'},
+    {label:'请求URL', prop:'op_url', align:'center'},
+    {label:'主机地址', prop:'op_ip', align:'center'},
+    {label:'错误消息', prop:'error_msg', align:'center'},
+    {label:'创建时间', prop:'create_time', align:'center'},
+    {label:'管理', prop:'action', width:'150', align:'center'},
+]

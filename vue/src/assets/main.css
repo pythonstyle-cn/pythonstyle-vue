@@ -1,0 +1,102 @@
+@import './base.css';
+.el-popper.is-light{
+  background: #ffffff !important;
+}
+.common-layout{
+    background-color: rgb(252, 252, 252);
+    height: 100vh;
+}
+.el-container{
+    background: #f2f3f5;
+}
+.aside{
+    background-color: rgb(1, 1, 63);height: 100vh;
+    transition: width 0.3s ease;
+}
+.header{
+    background-color: rgb(247, 247, 249);
+    height: 100px;
+    display: flex;
+    align-items: center; /* 垂直居中 */
+    box-shadow: 0px 1px 4px rgba(0, 20, 40, 0.2);
+    margin-bottom: 0px;
+}
+/*这部分是左边栏css*/
+.aside .el-menu-vertical{
+    background: none;
+}
+.el-menu{
+    border-right: solid 0px !important;
+}
+.aside .sidebar-logo-container{
+    height: 60px;
+    display: flex;
+    line-height: 60px;
+    justify-content:center
+}
+.aside .sidebar-logo-container h3{
+    font-size: 16px;
+    color: #ffffff;
+    text-align: center;
+}
+.aside .logo{
+    width: 120px;
+    height: 40px;
+    color: #ffffff;
+    margin-top: 10px;
+}
+/*这部分是左边栏css end*/
+
+.el-main{
+  
+  height: calc(100vh - 100px);
+    
+}
+
+.table-content{
+    height: auto;
+  }
+  .table-content .handle-card{
+    border-radius: 3px;
+    display: flex;
+    align-items: center; 
+    
+  }
+  .table-content .handle-card .search{
+    display: flex;
+    width: 82%;
+  }
+  .table-content .tree-table .el-table__header .cell{
+    color: black;
+    font-size: 16px;
+  }
+  .table-content .tree-table{
+    border: 0px solid #e4e7ed;
+  }
+  .table-content .handle-card .el-card{
+    padding-top: 10px;
+  }
+  .table-content .handle-card .handle{
+    flex: 1;
+    text-align:center;
+  }
+  .table-content .handle-card .el-card__body{
+    width: 100%;
+    padding: 10px;
+    display: flex;
+  }
+  .search-content .search-input{
+    max-width: 130px;
+    min-width: 80px;
+  }
+  .search-content .search-popover-btn{
+    text-align: right;
+  }
+
+  .table-content .listorder-input .el-input__inner{
+    text-align: center !important;
+  }
+  .search-content .el-form--inline .el-form-item{
+    margin-right: 10px;
+  }
+  
