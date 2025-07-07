@@ -23,17 +23,23 @@ router.beforeEach((to, from, next) => {
           userStore.getUserInfo().then( () => {
             const role_ids = userStore.roles
             menuStore.generateRoutes(role_ids).then( routerLists =>{
-              const home  = {path: '/index',name: '首页',component: () => import('@/views/index.vue'),}
-              routerLists.push(home)
-              router.addRoute(
-                {
-                  path: '',
-                  component:  Layout,
-                  name: '首页',
-                  redirect:'/index',
-                  children: routerLists
-                },
-              )
+              const home = {
+                path: '/index',
+                name: '首页', // 这里为首页设置一个唯一的名称
+                component: () => import('@/views/index.vue'),
+              };
+          
+              // 将首页路由添加到路由列表中
+              routerLists.push(home);
+          
+              // 添加父路由
+              router.addRoute({
+                path: '',
+                component: Layout,
+                name: '首页-布局', // 修改父路由的名称，确保和子路由不重复
+                redirect: '/index',
+                children: routerLists, // 将生成的子路由传入
+              });
               next({ ...to, replace: true }) // hack方法 确保addRoutes已完成
             })
           }).catch(err => {

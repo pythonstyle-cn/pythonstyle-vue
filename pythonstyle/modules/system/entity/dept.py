@@ -40,7 +40,7 @@ class DeptEntity(db.Entity):
     @staticmethod
     def get_datainfo_by_id(primary_id):
         dataInfo = {}
-        result = DeptEntity.get(dept_id=primary_id, del_flag='0')
+        result = DeptEntity.get(dept_id=primary_id)
         if result:
             result = DeptEntity.formatDate(result)
             dataInfo = result.to_dict()
