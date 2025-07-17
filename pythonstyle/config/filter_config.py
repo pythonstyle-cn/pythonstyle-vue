@@ -34,7 +34,7 @@ def FilterConfig(func):
         # 配置默认控制器过滤器
         c = ['admin','captcha','menu']
         # 配置默认方法过滤器
-        a = ['redirect','login','register','captcha_image']
+        a = ['redirect','login','register','captcha_image','login_out']
         #默认拦截所有的
         is_passed = False
         #判断是否已经认证
