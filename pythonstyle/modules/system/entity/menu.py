@@ -53,19 +53,19 @@ class MenuEntity(db.Entity):
 
     @db_session
     @staticmethod
-    def get_role_menu_by_roleids(role_ids):
+        def get_role_menu_by_roleids(role_ids):
+        #set_sql_debug(True)
         role_ids_str = ', '.join(str(id) for id in role_ids)
         # 如果是超级管理员 直接获取全部菜单
         if 1 in role_ids:
            return MenuEntity.get_menu_list()
         else:
-            raw_sql('rm.role_id in ($role_ids_str)')
+            raw_sql('rm.role_id in ('+ role_ids_str +')')
         roleMenuInfo = []
         query = left_join(
             (menu)
             for menu in MenuEntity for rm in menu.roles
-            if raw_sql('rm.role_id in ($role_ids_str)'))[:]
-
+            if raw_sql('rm.role_id in ('+ role_ids_str +')'))[:]
         if len(query) > 0:
             for menu in query[:]:
                 menu = MenuEntity.formatDate(menu)
