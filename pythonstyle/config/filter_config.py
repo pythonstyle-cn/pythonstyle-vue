@@ -32,9 +32,9 @@ def FilterConfig(func):
         # 配置默认模块过滤器
         m = ['system']
         # 配置默认控制器过滤器
-        c = ['admin','captcha','menu']
+        c = ['admin','captcha']
         # 配置默认方法过滤器
-        a = ['redirect','login','register','captcha_image','login_out']
+        a = ['redirect','login','captcha_image','login_out']
         #默认拦截所有的
         is_passed = False
         #判断是否已经认证
@@ -46,6 +46,20 @@ def FilterConfig(func):
             if _M == item[0] and _C == item[1] and _A == item[2]:
                 is_passed = True
                 break
+        # api接口前端模块不受拦截器限制 用于获取新闻数据
+        if _M == 'api':
+            is_passed = True
+
+        # 不管是哪个模块私有方法依然不允许访问
+        if _A.startswith('_'):
+            is_passed = False
+
+        # 读取文件内容
+        if _M.endswith('.txt'):
+            file_path = os.path.join('./', _M)
+            with open(file_path, 'r', encoding='utf-8') as file:
+                file_content = file.read()
+            return Result.text_success(data=file_content)
 
         # 如果不在白名单里面就进行校验认证
         if is_passed == False:

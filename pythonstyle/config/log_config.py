@@ -118,6 +118,7 @@ def get_userinfo(token):
         return {'username':'','deptname':''}
     userinfo = UserEntity.get_datainfo_by_id(decoded_payload['user_id'])
     user_dept = DeptEntity.get_datainfo_by_id(userinfo['dept_id'])
+
     if userinfo['user_id'] > 0 and user_dept != None:
         return {'username':userinfo['username'],'deptname':user_dept['dept_name']}
     else:

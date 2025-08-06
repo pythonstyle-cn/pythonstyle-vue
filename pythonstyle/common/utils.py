@@ -81,7 +81,6 @@ def getHttpHeaders(name, request = request):
     '''
     try:
         headers = request.headers[name]
-        logging.info(f'headers:{headers}')
         return headers
     except Exception as error:
         logging.info(f'headers:{error}')
@@ -131,6 +130,38 @@ def postRequestJson(request = request):
     if request.get_json():
         data = request.get_json()
     return data
+
+def getFiles(name,request=request):
+    '''
+    描述：获取单个上传文件
+    :param name:
+    :param request:flask的模块
+    :return:param
+    '''
+    data = {}
+    if request.files[str(name)]:
+        data = request.files[str(name)]
+    return data
+
+def getMultFiles(name,request=request):
+    '''
+    描述：获取多个上传文件
+    :param name:
+    :param request:flask的模块
+    :return:param
+    '''
+    data = {}
+    if request.files.getlist(str(name)):
+        data = request.files.getlist(str(name))
+    return data
+
+def sendFiles(filepath, filename):
+    '''
+    描述：根据提供的文件路劲下载文件
+    :param filepath:
+    :return:
+    '''
+    return send_file(filepath, as_attachment=True, download_name=filename,mimetype='application/zip')
 
 def isPost(request = request):
     '''
@@ -294,3 +325,72 @@ def getMillisecond(formate = "%Y%m%d%H%M%S%f"):
     # 格式化时间并精确到毫秒
     formatted_time = current_time.strftime(formate)
     return formatted_time
+
+def is_has_children(dictionary):
+    return 'children' in dictionary
+
+def dateFormatStartAndEnd(date_interval):
+    '''
+    描述：根据时间标识 返回时间段
+    :param day week month quarter year
+    :param date_interval:
+    :return: {xxxx-xx-xx xx:xx:xx}
+    '''
+    dtime = datetime.today()
+    today = dtime.date()
+    start_time = f'00:00:00'
+    end_time = f'23:59:59'
+    result = {
+        'start':'',
+        'end':f"{today} {end_time}"
+    }
+    # 获取今天的日期
+    if date_interval == 'day':
+        result['start'] = f"{today} {start_time}"
+    # 获取今天之前七天的日期
+    seven_days_ago = today - timedelta(days=7)
+    if date_interval == 'week':
+        result['start'] = f"{seven_days_ago} {start_time}"
+
+    # 获取本月的第一天
+    first_day_of_month = today.replace(day=1)
+    if date_interval == 'month':
+        result['start'] = f"{first_day_of_month} {start_time}"
+
+    # 获取本季的第一天
+    if date_interval == 'quarter':
+        quarter = getSeasonData()
+        result['start'] = f"{quarter['season_start']} {start_time}"
+    # 获取今年的第一天
+    current_year = datetime.today().year
+    first_day_of_year = datetime(current_year, 1, 1).strftime('%Y-%m-%d')
+    if date_interval == 'year':
+        result['start'] = f"{first_day_of_year} {start_time}"
+    return result
+
+def getSeasonData():
+    # 获取当前日期
+    today = datetime.today()
+    # 判断当前季节
+    if 3 <= today.month <= 5:
+        season_start = datetime(today.year, 3, 1)  # 春季开始
+        season_end = datetime(today.year, 5, 31)  # 春季结束
+        season_name = "春季"
+    elif 6 <= today.month <= 8:
+        season_start = datetime(today.year, 6, 1)  # 夏季开始
+        season_end = datetime(today.year, 8, 31)  # 夏季结束
+        season_name = "夏季"
+    elif 9 <= today.month <= 11:
+        season_start = datetime(today.year, 9, 1)  # 秋季开始
+        season_end = datetime(today.year, 11, 30)  # 秋季结束
+        season_name = "秋季"
+    else:
+        season_start = datetime(today.year, 12, 1)  # 冬季开始
+        season_end = datetime(today.year + 1, 2, 28 if today.year % 4 != 0 else 29)  # 冬季结束
+        season_name = "冬季"
+    season ={
+        'season_start':season_start.date(),
+        'season_end':season_end.date(),
+        'season_name':season_name
+    }
+    return season

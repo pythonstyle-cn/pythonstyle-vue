@@ -1,4 +1,4 @@
-# pythonstyle-vue
+# pythonstyle-vue github
 PythonStyle是一个企业级开发平台，基于flask基础，采用MVC架构，统一入口，自动实现访问路由。内置模块包含：用户管理、部门管理、角色管理、菜单及按钮授权、日志管理、登录模块等。  
 
 >一个轻量级python WEB MVC开发框架

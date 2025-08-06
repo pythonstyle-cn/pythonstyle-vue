@@ -53,7 +53,7 @@ class MenuEntity(db.Entity):
 
     @db_session
     @staticmethod
-        def get_role_menu_by_roleids(role_ids):
+    def get_role_menu_by_roleids(role_ids):
         #set_sql_debug(True)
         role_ids_str = ', '.join(str(id) for id in role_ids)
         # 如果是超级管理员 直接获取全部菜单

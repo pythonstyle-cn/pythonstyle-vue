@@ -71,7 +71,7 @@ class user(Result):
         else:
             return Result.error(code=201, msg='操作失败')
     @Log
-        def update(self):
+    def update(self):
         '''
         描述：修改用户信息
         参数：用户表字段，必须包含user_id
@@ -80,7 +80,7 @@ class user(Result):
         if params['user_id'] == None:
             return Result.error(code=201, msg='修改失败，缺少主键参数！')
         redis_userinfo = self.get_redis_userinfo_id()
-        password = params['password'] + 'edsdkjjhnsdf'
+        password = utils.filter_xss(params['password'])+'edsdkjjhnsdf'
         md5_password = utils.md5_encrypt(password)
         params['password'] = md5_password
         # 不允许非超级管理员修改其他人信息
@@ -88,17 +88,18 @@ class user(Result):
             if params['user_id'] != redis_userinfo['user_id']:
                 return Result.error(code=206, msg='操作失败，非超级管理员不能修改别人的信息！')
             password = params.pop('password')
+        else:
+            if params['user_id'] == redis_userinfo['user_id']:
+                password = params.pop('password')
+
         params['update_time'] = utils.formatDate()
 
-        # 将字典里面为Null的转换成空字符串
-        params = utils.dictNullToempty(params)
         create_time = params.pop('create_time')
         role_ids = params.pop('role_ids')
         try:
             post_ids = params.pop('post_ids')
         except Exception as e:
             post_ids = []
-
         result = UserRoleEntity.edit_data(params, role_ids)
         if result:
             if len(post_ids) > 0:

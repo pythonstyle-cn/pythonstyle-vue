@@ -156,6 +156,22 @@ class UserEntity(db.Entity):
         user_dict['post_id'] = user_post
         return user_dict
 
+    @db_session
+    @staticmethod
+    def get_userinfo_by_id(primary_id):
+        '''
+            描述：根据用户id获取用户信息（包括密码）
+            param：primary_id 用户名  主键
+        '''
+        dataInfo = {}
+        result = UserEntity.get(user_id=primary_id, del_flag='0')
+        if result:
+            result = UserEntity.formatDate(result)
+            dataInfo = result.to_dict()
+        return dataInfo
+
+
+
     @staticmethod
     def formatDate(result):
         if result.create_time != None and type(result.create_time) != str:
