@@ -69,4 +69,27 @@ export const getUserPostsData = (params) => {
     })
 }
 
+export const getInitData = () => {
+    return request({
+        url: '/system/admin/public_get_userinfo',
+        method: 'POST'
+    })
+}
+
+export const editProfile = ( data ) => {
+    return request({
+        url: '/system/admin/profile',
+        method: 'POST',
+        data:data
+    })
+}
+
+export const editPassword = ( data ) => {
+    return request({
+        url: '/system/admin/change_password',
+        method: 'POST',
+        data:data
+    })
+}
+
 

@@ -1,5 +1,4 @@
 import { defineStore } from 'pinia'
-import {getToken,setToken,removeToken} from '@/utils/Token'
 import { getRoleRouter } from '@/api/sysetm/menu'
 
 // 匹配views里面所有的.vue文件
@@ -39,15 +38,17 @@ const useMenuStore = defineStore(
       return new Promise((resolve, reject) => {
           getRoleRouter(role_ids).then(res => {
               if (res.code == 200) {
+                const routerList = res.data.routers
                 const menuList = res.data.routers
                 const permissions = res.data.permissions
                 const roles_info = res.data.roles_info
                 this.setRoles(roles_info)
-                this.setMenuList(menuList)
                 this.setPermissions(permissions)
-                const routerLists = buildRouterData(menuList)
+                const routerLists = buildRouterData(routerList)
                 this.setMenuRouter(routerLists)
                 resolve(routerLists)
+                const menu_lists = buildMenuData(menuList)
+                this.setMenuList(menu_lists)
               } else {
                   reject()
               }
@@ -96,6 +97,22 @@ function buildRouterData(menu) {
   }
   return routes;
 }
+
+//递归生成菜单
+function buildMenuData(menu) {
+  const menus_lists = [];
+  for (const item of menu) {
+    if ((item.menu_type !== 'F' && item.visible !== '1') || item.status !== '0'){
+      if (item.children && item.children.length > 0 ) {
+        item.children = buildMenuData(item.children);
+      }
+      menus_lists.push(item)
+    }
+  }
+  
+  return menus_lists;
+}
+
 
 export const loadView = (view) => {
   let res;

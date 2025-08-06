@@ -2,7 +2,7 @@ import router from '@/router/index'
 import { defineStore } from 'pinia'
 import {getToken,setToken,removeToken} from '@/utils/Token'
 import {login, getUserInfo, loginOut} from '@/api/login'
-
+const base_url = import.meta.env.VITE_APP_BASE_API
 const useUserStore = defineStore(
   'user', {
   //state 是 store 的数据 (data)
@@ -31,7 +31,7 @@ const useUserStore = defineStore(
     },
     loginOut() {
       return new Promise((resolve, reject) => {
-        loginOut(this.token).then((response) => {
+        loginOut().then((response) => {
           removeToken()
           this.token = ''
           this.roles = []
@@ -39,6 +39,7 @@ const useUserStore = defineStore(
           resolve(response)
           router.replace('/login')
         }).catch(error => {
+          router.replace('/login')
           reject(error)
         })
       })
@@ -48,7 +49,7 @@ const useUserStore = defineStore(
       return new Promise((resolve, reject) => {
         getUserInfo().then(res => {
           const userData = res.data
-          const avatar = (userData.avatar !== "" || userData.avatar !== null) ? userData.avatar : 'https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png';
+          const avatar = userData.avatar.length > 0 ? base_url + userData.avatar : '';
           if (userData.role_id && userData.role_id.length > 0) { // 验证返回的roles是否是一个非空数组
             this.setRoles(userData.role_id)
           }
@@ -87,7 +88,6 @@ function filterAsyncRouter(asyncRouterMap, lastRouter = false, type = false) {
         route.component = InnerLink
       } else {
         route.component = loadView(route.component)
-        console.log('component',route.component)
       }
     }
     if (route.children != null && route.children && route.children.length) {

@@ -33,7 +33,7 @@ export const login = (username, password, code, uuid)=>{
 //获取用户信息
 export const getUserInfo = ()=>{
     return request({
-      url: '/system/admin/get_userinfo',
+      url: '/system/admin/public_get_userinfo',
       method: 'GET'
     })
 }

@@ -2,7 +2,6 @@ import router from './router'
 import { getToken,removeToken } from '@/utils/Token'
 import useUserStore from "@/stores/user-store";
 import useMenuStore from "@/stores/menu-permission";
-import { isHttp } from '@/utils/comment'
 import Layout from '@/layout'
 
 //定义白名单
@@ -19,24 +18,22 @@ router.beforeEach((to, from, next) => {
       } else {
         if (userStore.roles.length === 0) {
           // 判断当前用户是否已拉取完user_info信息
-          console.log('to',to)
           userStore.getUserInfo().then( () => {
             const role_ids = userStore.roles
             menuStore.generateRoutes(role_ids).then( routerLists =>{
               const home = {
                 path: '/index',
-                name: '首页', // 这里为首页设置一个唯一的名称
+                name: '工作台', // 这里为首页设置一个唯一的名称
                 component: () => import('@/views/index.vue'),
               };
           
               // 将首页路由添加到路由列表中
               routerLists.push(home);
-          
               // 添加父路由
               router.addRoute({
                 path: '',
                 component: Layout,
-                name: '首页-布局', // 修改父路由的名称，确保和子路由不重复
+                name: '首页', // 修改父路由的名称，确保和子路由不重复
                 redirect: '/index',
                 children: routerLists, // 将生成的子路由传入
               });
@@ -49,7 +46,7 @@ router.beforeEach((to, from, next) => {
             //   next({ path: '/' })
             // })
           })
-        } else {
+        } else  {
           next()
         }
       }
